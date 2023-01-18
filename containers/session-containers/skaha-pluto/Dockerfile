@@ -6,9 +6,9 @@ RUN yum makecache -y && \
     yum clean all
 
 WORKDIR /
-RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.8/julia-1.8.0-beta3-linux-x86_64.tar.gz && \
-    tar zxvf julia-1.8.0-beta3-linux-x86_64.tar.gz && \
-    rm julia-1.8.0-beta3-linux-x86_64.tar.gz
+RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.8/julia-1.9.0-beta2-linux-x86_64.tar.gz && \
+    tar zxvf julia-1.9.0-beta2-linux-x86_64.tar.gz && \
+    rm julia-1.9.0-beta2-linux-x86_64.tar.gz
 
 # We want to set up Julia carefully.
 # We want some packages e.g. Pluto backed into the container,
@@ -50,7 +50,7 @@ RUN chmod a+rx /usr/local/bin/fix-permissions
 # for e.g. Pluto but might cause issues if they install a new package that is incompatible with
 # a transitive dependency like requiring an old version of HTML.jl
 
-RUN julia -e 'using Pkg; Pkg.add(["Pluto", "PlutoUI", "PackageCompiler"]); using PackageCompiler; create_sysimage([:Pluto, :PlutoUI],sysimage_path="/PlutoSysImg.so")' && \
+RUN julia -e 'using Pkg; Pkg.add(["Pluto", "PackageCompiler"]); using PackageCompiler; create_sysimage([:Pluto,],sysimage_path="/PlutoSysImg.so")' && \
     rm -rf ${JULIA_DEPOT_PATH}/registries/General && \
     chmod -R 755 ${JULIA_DEPOT_PATH}/artifacts && \
     fix-permissions /julia* /opt/julia PlutoSysImg.so
