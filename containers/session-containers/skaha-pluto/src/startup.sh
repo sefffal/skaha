@@ -20,7 +20,8 @@ export JULIA_LOAD_PATH="/opt/julia/environments/v1.8/Project.toml:"
 # Default project environment kept in the user's home directory
 export JULIA_PROJECT="$HOME"
 
-julia -J /PlutoSysImg.so -e 'using Pluto; Pluto.run(require_secret_for_access=false, auto_reload_from_file=true, launch_browser=false, host="0.0.0.0", port=5000)'
+#julia -J /PlutoSysImg.so -e 'using Pluto; Pluto.run(require_secret_for_access=false, auto_reload_from_file=true, launch_browser=false, host="0.0.0.0", port=5000)'
+julia  -e 'using Pluto; Pluto.run(require_secret_for_access=false, auto_reload_from_file=true, launch_browser=false, host="0.0.0.0", port=5000)'
 
 echo "Exiting"
 
